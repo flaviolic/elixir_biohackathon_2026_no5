@@ -38,65 +38,47 @@ authors_short: Nevruz, B. \emph{et al.}
 
 # Abstract
 
-Interoperability practices developed by research projects, institutes, platforms, and scientific communities are often distributed across presentation slides, internal wikis, spreadsheets, and email threads. This makes the practices difficult to discover, compare, improve, and reuse. Project 5 at BioHackathon Europe 2026 addressed this problem by developing a submission and visualisation workflow for sharing structured community interoperability practices across the research data management ecosystem.
+Interoperability practices developed across research projects, institutes, and scientific communities are frequently scattered across presentation slides, internal wikis, spreadsheets, and email threads, making them difficult to discover, compare, and reuse. Project 5 at BioHackathon Europe 2026 addressed this gap by developing a self-service submission and visualisation workflow structured around the RDMkit Data Life Cycle.
 
-The project built on an existing questionnaire organised around stages of the RDMkit Data Life Cycle. The questionnaire captures the context of a practice, the tasks performed, the tools and resources used, the people or roles involved, and relevant constraints. During the BioHackathon, the team reviewed the questions to identify where registries, ontologies, controlled vocabularies, and community standards could support structured answers. The team also developed requirements for a user interface, considered routes for importing Data Stewardship Wizard output and existing JSON records, and designed visualisation levels ranging from an overview of a community practice to detailed views of lifecycle phases, tasks, tools, and contributions.
-
-The resulting design combines controlled selections with free-text input and a proposed human-reviewed terminology-suggestion process. It supports machine-readable export and visual comparison while retaining the original community description. Deployed via GitHub Pages alongside public documentation, the work provides an open, maintainable foundation through which communities can submit, discover, compare, and iteratively improve interoperability practices.
+The team mapped an existing 41-question lifecycle survey to controlled vocabularies, ontologies, registries, and community standards, and defined a dual-loop workflow combining structured dropdown selections with human-reviewed free-text terminology suggestions. The resulting practice objects support machine-readable export (JSON/YAML) and multi-level visual comparison while preserving original respondent descriptions. Deployed via GitHub Pages alongside public documentation, the platform provides an open, maintainable foundation for communities to submit, compare, and iteratively improve interoperability practices.
 
 # Introduction
 
-Research communities repeatedly address similar operational questions: how data and metadata are captured, which identifiers and file formats are used, which tools support a task, how outputs are deposited, and how workflows can be reproduced. The resulting practices are frequently documented for a local audience rather than represented as reusable objects. Relevant information may be spread across slides, internal documentation, spreadsheets, and correspondence. Consequently, a researcher or data steward may find it difficult to determine what another community does for a comparable task or which standards and tools are already in use.
+Research communities regularly encounter the same practical challenges: capturing data and metadata, choosing identifiers and file formats, selecting tools, depositing outputs, and maintaining reproducibility. Because these practices are typically documented informally for local audiences, researchers and data stewards struggle to see how comparable domains handle similar tasks or which standards they apply.
 
-An ongoing ELIXIR Interoperability Platform activity has used guided interviews and a questionnaire structured around the RDMkit Data Life Cycle to capture such practices. The guided approach helps participants interpret the questions, but it limits scalability because completion depends on facilitator time and subsequent manual synthesis. Project 5 therefore set out to translate the interview process into a lightweight, self-service submission and visualisation workflow.
+An ongoing ELIXIR Interoperability Platform activity has captured such practices through guided interviews structured around the RDMkit Data Life Cycle. While facilitation helps respondents interpret questions, reliance on interviewer time and manual synthesis limits scalability. Project 5 set out to translate this interview process into a lightweight, self-service resource that records practices in their community context and links them to relevant resources (including FAIRsharing, bio.tools, software repositories, repository registries, standards, and ontologies).
 
-The project goal was not to define a single universal workflow. Instead, the intended resource records practices in their community and task context, connects answers to relevant FAIR-enabling resources where appropriate, and allows users to inspect similarities, differences, and gaps. Potentially linked resources include RDMkit, the FAIR Cookbook, FAIRsharing, bio.tools, software repositories, repository registries, community standards, and ontologies.
+Specifically, the project pursued five objectives:
 
-This report describes the design work, questionnaire mapping, prototype workflow, cross-project discussions, and remaining implementation decisions from BioHackathon Europe 2026 Project 5, “A submission and visualisation interface for sharing community interoperability practices.”
+1. Convert the guided questionnaire into a self-service submission workflow.
 
-The project had five objectives:
+2. Represent submitted practices as structured, machine-readable objects (JSON and YAML).
 
-1. Convert the existing guided questionnaire into a workflow that stakeholders can complete directly.
+3. Ground applicable fields in ontologies, registries, standards, databases, and role vocabularies.
 
-2. Represent submitted practices in a structured form suitable for machine-readable export, initially JSON and YAML.
+4. Define visualisation views spanning high-level community overviews to granular task, tool, input/output, and contributor details.
 
-3. Identify questionnaire fields that can use controlled terms from ontologies, registries, community standards, databases, or role vocabularies.
+5. Establish a curator-reviewed feedback loop so validated free-text terms enrich dropdown options for future submissions.
 
-4. Develop visualisation requirements that support both a community overview and detailed inspection of lifecycle phases, tasks, tools, inputs, outputs, and contributions.
-
-5. Define a curation loop through which free-text answers and proposed mappings can be reviewed before becoming reusable options for later submissions.
-
-The intended users include researchers seeking examples from comparable domains, data stewards looking for operational practices, community coordinators documenting a shared process, and maintainers of RDM ecosystem resources interested in linking practice descriptions to relevant guidance, standards, tools, and registries.
+Target users include researchers seeking domain reference workflows, data stewards documenting operational practices, community coordinators, and maintainers of RDM ecosystem resources.
 
 # Approach
 
-## Starting materials and design inputs
+## Design inputs and workstreams
 
-The work started from the existing lifecycle-based survey questions, supporting spreadsheets, example answers, project slides, a sign-up sheet, and the project repository. The current process combines guided interviews with manual mapping and synthesis. The BioHackathon work examined how this process could be decomposed into reusable technical components without removing the context supplied by respondents.
-
-The team organised the work into four connected streams:
-
-1. Interface requirements and implementation.
-
-2. Mapping questionnaire fields to ontologies, registries, databases, tools, documents, standards, and role vocabularies.
-
-3. A feedback process in which reviewed answers can populate later dropdown menus.
-
-4. Interlinking with the wider RDM ecosystem.
+Building on the existing lifecycle questionnaire, manual synthesis spreadsheets, and mock examples, the team decomposed the workflow into four technical streams: (1) user interface and visualisation requirements, (2) question-to-terminology mapping, (3) a review-gated vocabulary feedback loop, and (4) ecosystem interlinking.
 
 ## Questionnaire and terminology mapping
 
-Each questionnaire item was reviewed to identify: the concept that the question aims to capture; the type of resource that could support the answer; and candidate values, registries, standards, or ontologies suitable for a dropdown menu or suggested mapping. The resource categories included databases, tools, ontologies, registries, individual documents, community standards, and role vocabularies.
-
-Examples considered during the mapping included EDAM for data and analysis operations, bio.tools for software resources, re3data for repositories, FAIRsharing for standards and databases, and role vocabularies for responsibility and contribution statements. The mapping was treated as a candidate layer for human review, not as an automatic replacement for a respondent’s original wording.
+Each survey question was evaluated to define the target concept, the expected resource category, and candidate controlled terms for dropdown selection or automated suggestion. Candidate mappings were designed as an enrichment layer subject to human verification rather than an automatic replacement for respondent wording.
 
 ## Submission and curation workflow
 
-The proposed workflow supports three entry routes: completion through the Data Stewardship Wizard followed by import; direct completion in the submission interface; and loading of an existing practice object represented in JSON. A master options file supplies reviewed values for structured fields.
+The architecture supports three data-entry routes: importing Data Stewardship Wizard (DSW) outputs, completing the questionnaire directly in the web interface, or loading an existing JSON practice record. A central master JSON file supplies reviewed dropdown options to both DSW and the web interface.
 
-Where a suitable reviewed option exists, the user selects it from a dropdown menu. Where no suitable option exists, the user enters free text. A terminology-suggestion component may propose candidate mappings, but the user or curator must review the suggestion. New values are added to the master options only after semantic and contextual review. This is intended to reduce mismatches such as assigning a role term to a process or treating a software resource as a standard.
+When no suitable dropdown option exists, respondents enter free text. An LLM-assisted suggestion step proposes candidate ontology or registry terms for user review prior to submission. Before new free-text terms are added to the master options file, administrators perform semantic quality control to prevent category mismatches (such as assigning a process description to a role question).
 
-```mermaid
+```
 graph TD;
     subgraph Master Vocabulary Repository
         OPT[Master Options JSON File<br/>Central Controlled Vocabulary Store]
@@ -133,23 +115,23 @@ graph TD;
 
 ## Visualisation requirements
 
-The design discussions identified several levels of inspection:
+Interface requirements were structured around four progressive inspection levels:
 
-1. A community-level view organised around the research data lifecycle.
+1. **Community view:** Overview mapped onto the RDM lifecycle.
 
-2. A multi-community view for comparison across domains or topics.
+2. **Multi-community view:** Cross-domain comparison across topics or projects.
 
-3. A phase-level view covering one or more selected lifecycle stages.
+3. **Phase view:** Filtered inspection of one or more selected lifecycle stages.
 
-4. A task-level view exposing tools, inputs, outputs, roles, contributions, and the original answer when a suggested mapping has been applied.
+4. **Task view:** Detail card exposing tools, inputs, outputs, roles, and original respondent text alongside mapped terms.
 
-Suggested interaction patterns included a lifecycle wheel, search by topic or data type, visual indication of incomplete sections, and a detail card for an individual task. Additional perspectives considered included data-centred, role-centred, community-centred, and Node-expertise views.
+Additional design features include a lifecycle wheel, search by topic or data type, visual indicators for incomplete sections, and pivots by data type, role, community, or ELIXIR Node expertise.
 
 # Results
 
 ## Questionnaire-to-resource mapping
 
-The team reviewed all 41 questionnaire items across seven lifecycle sections and classified each item by target concept, expected resource type, and candidate controlled vocabularies or registries (Table 1). Across the survey, role-related questions were mapped to Terms4FAIRskills (`T4FS:0000178`) and the Contributor Role Ontology (`CRO`), while domain operations, formats, software, repositories, and access conditions were linked to established registries and ontologies.
+All 41 survey items across seven lifecycle stages were classified into seven resource categories (`database`, `tool`, `ontology`, `registry`, `individual document`, `community standard`, and `roles`) and linked to target vocabularies (Table 1). Role questions were mapped to Terms4FAIRskills (e.g. `T4FS:0000178`) and the Contributor Role Ontology (`CRO`), while operations, formats, tools, repositories, and licences were aligned with domain registries.
 
 Table: Summary of questionnaire sections mapped to resource types and candidate vocabularies or registries.
 
@@ -163,37 +145,35 @@ Table: Summary of questionnaire sections mapped to resource types and candidate 
 | **6. Share** | Shared objects, platforms, legal/ethical constraints, metadata | database, individual document, community standard, roles | Zenodo, ENA, DUO, Dublin Core, `T4FS` | 
 | **7. Reuse** | Reuse planning, standards, licences, discoverability | community standard, individual document, registry, roles | SPDX, DataCite, Schema.org, `T4FS` | 
 
-## Prototype submission, visualisation, and GitHub-hosted deployment
+## Prototype implementation and GitHub-hosted deployment
 
-An initial prototype web interface (`https://bh.bilgehan.nl/submit`) was implemented alongside Data Stewardship Wizard (DSW) templates, both drawing dropdown options from a shared JSON options file. To support transparent community participation and long-term sustainability, a GitHub-hosted version of the submission interface (`https://biocorecrg.github.io/biohackathon-community-practices-2026/submit`) and accompanying documentation site (`https://biocorecrg.github.io/biohackathon-community-practices-2026/docs/`) were also established. Hosting the application and documentation via GitHub enables open community contributions to both practice content (such as seed submissions and reviewed vocabulary options) and ongoing website maintenance via standard pull-request workflows.
+An initial web prototype (`https://bh.bilgehan.nl/submit`) and aligned DSW templates were built around the shared JSON options file, supporting network graph comparison against prior submissions and diagram export in SVG, PNG, and JSON formats. Test responses were used to prototype the LLM-assisted terminology suggester and admin review workflow.
 
-Within the interface, respondents can select pre-mapped terms or enter free text, inspect ontology mappings proposed for free-text entries prior to submission, compare submitted practices in a network view against existing community records, and export diagrams as SVG, PNG, or JSON. To support curation, synthetic test responses were used to prototype an LLM-assisted terminology-suggestion pipeline for free-text answers and to define an admin review workflow, enabling curators to verify semantic appropriateness (for example, distinguishing role descriptors from process steps) before appending approved options to the master JSON file.
+To enable open community contributions to both practice content and ongoing site maintenance via pull requests, a GitHub-hosted version of the submission interface (`https://biocorecrg.github.io/biohackathon-community-practices-2026/submit`) and accompanying documentation portal (`https://biocorecrg.github.io/biohackathon-community-practices-2026/docs/`) were deployed.
 
 ## Visualisation mockups and seed examples
 
-UI mockups were produced for the lifecycle wheel overview, topic and data-type search, visual masking of incomplete sections, and task-level detail cards. Initial seed records from participating ELIXIR communities (including biodiversity, toxicology, and rare diseases) were prepared to test the end-to-end workflow and demonstrate the interface during the hackathon poster session.
+UI mockups were created for the lifecycle wheel, search interface, incomplete-section masking, and task detail cards. Initial seed records from participating ELIXIR communities (biodiversity, toxicology, and rare diseases) were compiled to test the submission workflow and demonstrate the prototype during the hackathon poster session.
 
 # Discussion
 
-## Cross-project discussions and ecosystem alignment
+## Cross-project alignment
 
-Cross-project exchanges helped align the practice schema with complementary BioHackathon efforts:
+Discussions with parallel BioHackathon projects informed schema and integration choices:
 
-* **Credit and recognition (Project #6):** Discussions examined how granular role annotations captured via `T4FS` and `CRO` can support attribution for data stewards, bioinformaticians, and other contributors.
+* **Credit and recognition (Project #6):** Granular role annotations (`T4FS` and `CRO`) can support attribution for data stewards, bioinformaticians, and infrastructure contributors beyond traditional publications.
 
-* **Tool registries and linking strategies (Project #20):** Discussions with `bio.tools` contributors explored linking workflow tasks directly to tool registry entries, while exchanges on cross-document linking informed strategies for connecting practice records across RDMkit Tool Assemblies and GitHub repositories.
+* **Tool registries and cross-resource linking (Project #20):** Exchanges with `bio.tools` and cross-document linking initiatives guided strategies for connecting practice records to registry entries, RDMkit Tool Assemblies, and GitHub repositories.
 
-* **Project #3 (semantic framework standards)** was also reviewed and identified as a prospective contributor of community records once the interface is populated.
+* **Semantic framework standards (Project #3):** Reviewed for alignment and identified as a prospective contributor of community records.
 
 ## Remaining decisions and next steps
 
-Several technical and governance tasks remain before wider community deployment:
+1. **Automated ecosystem synchronisation:** Establish push/pull pipelines linking GitHub-hosted practice records and master vocabulary options with RDMkit Tool Assemblies, DSW knowledge models, and FAIRsharing.
 
-1. **Ecosystem integration and automated synchronisation:** Building on the GitHub-hosted deployment and documentation site, establish automated push/pull synchronisation workflows linking practice records and master vocabulary options with RDMkit Tool Assemblies, DSW knowledge models, and FAIRsharing.
+2. **Production curation governance:** Deploy the LLM suggestion pipeline in production and formalise editorial criteria for reviewing pull requests and master vocabulary additions.
 
-2. **Suggestion pipeline and curation governance:** Deploying the LLM suggestion cache in production and establishing lightweight editorial rules for reviewing pull requests and new master options.
-
-3. **Community testing and naming:** Expanding seed examples across additional domains, validating usability with data stewards, and finalising a permanent name for the tool.
+3. **Community validation and naming:** Expand seed examples across additional domains, evaluate usability with data stewards, and finalise a permanent tool name.
 
 ## Acknowledgements
 
@@ -203,6 +183,6 @@ We thank the BioHackathon Europe 2026 organisers, ELIXIR Europe, and the ELIXIR 
 
 ```
 \AtEndDocument{%
+}
 
 ```
-
