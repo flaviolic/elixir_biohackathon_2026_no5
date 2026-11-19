@@ -98,22 +98,6 @@ Where a suitable reviewed option exists, the user selects it from a dropdown men
 
 ```mermaid
 graph TD;
-    OPT[Reviewed options and mappings] -->|populate fields| DSW[Complete questionnaire in DSW];
-    OPT -->|populate fields| UI[Complete questionnaire in interface];
-    DSW -->|export and import| UI;
-    JSON[Existing practice JSON] -->|load| UI;
-    UI -->|structured selection| MAP[Ontology, registry, standard, or tool mapping];
-    UI -->|free-text answer| SUG[Terminology suggestion];
-    SUG -->|candidate mapping| REVIEW[Human review];
-    MAP --> PRACTICE[Structured practice object];
-    REVIEW --> PRACTICE;
-    REVIEW -->|approved new option| OPT;
-    PRACTICE --> VIEW[Lifecycle, task, and comparison views];
-    PRACTICE --> EXPORT[JSON, YAML, SVG, or PNG export];
-```
-
-```mermaid
-graph TD;
     subgraph Master Vocabulary Repository
         OPT[Master Options JSON File<br/>Central Controlled Vocabulary Store]
     end
@@ -146,41 +130,6 @@ graph TD;
     end
 
 ```
-
-```mermaid
-graph TD;
-    subgraph Master Vocabulary Repository
-        OPT[Master Options JSON File<br/>Central Controlled Vocabulary Store]
-    end
-
-    subgraph Data Entry & Ingestion
-        OPT -->|Populates Dropdown Options| A1[Fill Questionnaire in DSW]
-        OPT -->|Populates Dropdown Options| A2[Fill Questions Directly on UI]
-        A1 -->|Export DSW File| B1[Upload DSW Output to UI]
-        A2 --> C[Submission & Visualisation UI]
-        A3[Existing Practice JSON] -->|Load JSON| C
-        B1 --> C
-    end
-
-    subgraph Controlled Vocabulary & LLM Mapping
-        C -->|Select Pre-mapped Choice| D1[Dropdown Options: T4FS / EDAM / bio.tools]
-        C -->|Enter Free-Text Answer| D2[LLM Ontology Suggester]
-        D2 -->|Review & Confirm Mapping| C
-    end
-
-    subgraph User Visualisation & Comparative Analysis
-        C -->|Submit Practice Object| E1[Network Graph Visualisation]
-        E1 -->|Cross-Comparison| E2[Compare with Historical Community Responses]
-        E1 -->|Export Diagrams| E3[Download SVG / PNG / JSON]
-    end
-
-    subgraph Admin Validation & Feedback Loop
-        C -->|Submit for Curation| F1[Admin Review & Semantic QC]
-        F1 -->|Sanity Check: e.g. Role vs Process| F2[Validate Free-Text & Ontology Mappings]
-        F2 -->|Add Approved New Options| OPT
-    end
-```
-
 
 ## Visualisation requirements
 
