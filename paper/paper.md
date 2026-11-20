@@ -150,10 +150,10 @@ We created UI mockups for the lifecycle wheel, search bar, greyed-out incomplete
 
 ## Cross-project alignment
 
-Discussions with other BioHackathon projects helped shape our schema and integration plans:
+Discussions with other BioHackathon projects helped clarify our data model and integration plans:
 
-- **Credit and recognition (Project #6):** Capturing specific roles with `T4FS` and `CRO` makes it easier to credit data stewards, bioinformaticians, and infrastructure contributors alongside traditional authors.
-- **Tool registries and cross-resource linking (Project #20):** Conversations with `bio.tools` developers and teams working on cross-document linking helped define how practice records can link to tool registry entries, RDMkit Tool Assemblies, and GitHub repositories.
+- **Credit and recognition (Project #6):** Conversations with Project #6 highlighted three open design questions for attribution: accounting for differences in a person's role and resourcing across a project, institute, or infrastructure; allowing multiple people or roles to be attached so credit is not limited to a single team representative; and crediting individual tasks and task components (such as specific tools used within a step) rather than only the whole submission.
+- **Tool registries (Project #20):** Discussions with `bio.tools` developers focused on pushing tool-usage information from submitted practices to the registry, specifically which tool is used in a task and at which stage of the data lifecycle. While `bio.tools` already supports `EDAM:operation`, their team noted they may adjust their data model to better capture lifecycle context.
 - **Semantic framework standards (Project #3):** We checked for overlap with Project #3 and identified their group as potential contributors of community practice records.
 
 ## Remaining decisions and next steps
