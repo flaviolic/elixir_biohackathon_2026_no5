@@ -14,10 +14,6 @@ authors:
     orcid: 0000-0002-2036-8350
     affiliation: 2
     role: Conceptualization, Project administration, Writing – review & editing
-  - name: Flavio Licciulli
-    orcid: 0000-0002-1861-8947
-    affiliation: 3
-    role: DSW Knowledge Model implementation, Writing – review & editing
   - name: Tooba Abbassi-Daloii
     orcid: 0000-0002-4904-3269
     affiliation: 1
@@ -28,9 +24,6 @@ affiliations:
     index: 1
   - name: The University of Manchester, Manchester, United Kingdom
     index: 2
-  - name: Institute of Biomedical Technologies (ITB), National Research Council (CNR), Italy
-    ror: 04ehykb85
-    index: 3
 date: November 2026
 cito-bibliography: paper.bib
 event: BH26EU
